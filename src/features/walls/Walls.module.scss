@@ -1,0 +1,36 @@
+.container {
+  width: 60%;
+
+  @media screen and (max-width: 767.98px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 575.98px) {
+    width: 100%;
+  }
+}
+
+.field {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+}
+
+.cell {
+  aspect-ratio: 1;
+}
+
+.wall {
+  background: no-repeat center/100% 100% url("./wall.png");
+}
+
+.water {
+  background-color: #275ae7;
+}
+
+.air {
+  background-color: #93b7d6;
+}
+
+.amount {
+  text-align: center;
+}
