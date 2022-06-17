@@ -2,19 +2,17 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectWalls } from './wallsSlice';
 import WallsForm from './WallsForm';
-import getWallsWithWaterBetweenThem, { getWaterCells } from './wallsAPI';
+import getWaterCells from './wallsAPI';
 import styles from './Walls.module.scss';
 
 function Walls() {
   const walls = useSelector(selectWalls);
-  let wallsWithWaterBetweenThem = [];
   let waterCells = [];
   const field = [];
   const fieldWidth = walls.length;
   const fieldHeight = 10;
 
-  wallsWithWaterBetweenThem = getWallsWithWaterBetweenThem(walls);
-  waterCells = getWaterCells(walls, wallsWithWaterBetweenThem);
+  waterCells = getWaterCells(walls);
 
   for (let i = 0; i < fieldHeight; i += 1) {
     const row = [];
