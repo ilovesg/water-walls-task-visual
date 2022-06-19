@@ -84,7 +84,7 @@ export default function getWaterCells(walls = []) {
    * @returns {array} Array of water cells coordinates in string format like "[i]:[j]".
    */
   const getCellsWithWater = (relevantWallPairs = []) => {
-    const cellsWithWater = [];
+    const waterCells = [];
 
     relevantWallPairs.forEach((wallPair) => {
       const [leftWallIndex, rightWallIndex] = wallPair;
@@ -96,12 +96,12 @@ export default function getWaterCells(walls = []) {
         const intermediateWallHeight = walls[i];
 
         for (let j = intermediateWallHeight; j < boundaryWallHeight; j += 1) {
-          cellsWithWater.push(`${j}:${i}`);
+          waterCells.push(`${j}:${i}`);
         }
       }
     });
 
-    return cellsWithWater;
+    return waterCells;
   };
 
   const maxWalls = getMaxWalls();
