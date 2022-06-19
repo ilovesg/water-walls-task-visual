@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/water-walls-task-visual/static/css/main.65024071.css",
-    "main.js": "/water-walls-task-visual/static/js/main.6b270508.js",
+    "main.js": "/water-walls-task-visual/static/js/main.e4f059ba.js",
     "index.html": "/water-walls-task-visual/index.html",
     "main.65024071.css.map": "/water-walls-task-visual/static/css/main.65024071.css.map",
-    "main.6b270508.js.map": "/water-walls-task-visual/static/js/main.6b270508.js.map"
+    "main.e4f059ba.js.map": "/water-walls-task-visual/static/js/main.e4f059ba.js.map"
   },
   "entrypoints": [
     "static/css/main.65024071.css",
-    "static/js/main.6b270508.js"
+    "static/js/main.e4f059ba.js"
   ]
 }
