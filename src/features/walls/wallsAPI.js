@@ -1,4 +1,14 @@
+/**
+ * Returns an array containing coordinates of cells, which should be colored as water.
+ * @param {array} walls Source array with wall heights.
+ * @returns {array} Array of water cells coordinates in string format like "[i]:[j]".
+ */
 export default function getWaterCells(walls = []) {
+  /**
+   * Returns an array of arrays with 2 elements, which are respectively equal to index and value
+   * from source array for walls that can contain water.
+   * @returns {array} Arrays with indexes and values for walls that can contain water.
+   */
   const getMaxWalls = () => {
     const wallArrayMaxs = [];
 
@@ -19,6 +29,12 @@ export default function getWaterCells(walls = []) {
     return wallArrayMaxs;
   };
 
+  /**
+   * Returns an object containing wall pairs whith the maximum amount of water between them.
+   * @param {array} wallArrayMaxs Arrays with indexes and values for walls that can contain water.
+   * @returns {array} Object containing wall pairs whith the maximum amount of water
+   * between them. Keys are equal to left wall indexes, values are equal to right wall indexes.
+   */
   const getRelevantWallPairs = (wallArrayMaxs = []) => {
     const excludedWalls = [];
     const resultWalls = {};
@@ -57,6 +73,13 @@ export default function getWaterCells(walls = []) {
     return resultWalls;
   };
 
+  /**
+   * Returns an array containing coordinates of cells, which should be colored as water.
+   * @param {array} wallsWithWaterBetweenThem Object containing wall pairs whith the maximum amount
+   * of water between them. Keys are equal to left wall indexes, values are equal to right wall
+   * indexes.
+   * @returns {array} Array of water cells coordinates in string format like "[i]:[j]".
+   */
   const getCellsWithWater = (wallsWithWaterBetweenThem = []) => {
     const cellsWithWater = [];
 
