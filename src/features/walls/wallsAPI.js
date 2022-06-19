@@ -37,7 +37,7 @@ export default function getWaterCells(walls = []) {
    */
   const getRelevantWallPairs = (maxWalls = []) => {
     const excludedWalls = [];
-    const resultWalls = {};
+    const relevantWallPairs = {};
 
     for (let i = 0; i < maxWalls.length - 1; i += 1) {
       if (!excludedWalls.includes(i)) {
@@ -66,27 +66,27 @@ export default function getWaterCells(walls = []) {
             }
 
             if (!blockingWallFound) {
-              resultWalls[leftWallIndex] = rightWallIndex;
+              relevantWallPairs[leftWallIndex] = rightWallIndex;
             }
           }
         }
       }
     }
 
-    return Object.entries(resultWalls);
+    return Object.entries(relevantWallPairs);
   };
 
   /**
    * Returns an array containing coordinates of cells, which should be colored as water.
-   * @param {array} wallsWithWaterBetweenThem Object containing wall pairs whith the maximum amount
+   * @param {array} relevantWallPairs Object containing wall pairs whith the maximum amount
    * of water between them. Keys are equal to left wall indexes, values are equal to right wall
    * indexes.
    * @returns {array} Array of water cells coordinates in string format like "[i]:[j]".
    */
-  const getCellsWithWater = (wallsWithWaterBetweenThem = []) => {
+  const getCellsWithWater = (relevantWallPairs = []) => {
     const cellsWithWater = [];
 
-    wallsWithWaterBetweenThem.forEach((wallsPair) => {
+    relevantWallPairs.forEach((wallsPair) => {
       const [leftWallIndex, rightWallIndex] = wallsPair;
       const leftWallHeight = walls[+leftWallIndex];
       const rightWallHeight = walls[rightWallIndex];
