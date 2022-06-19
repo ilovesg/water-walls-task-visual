@@ -86,8 +86,8 @@ export default function getWaterCells(walls = []) {
   const getCellsWithWater = (relevantWallPairs = []) => {
     const cellsWithWater = [];
 
-    relevantWallPairs.forEach((wallsPair) => {
-      const [leftWallIndex, rightWallIndex] = wallsPair;
+    relevantWallPairs.forEach((wallPair) => {
+      const [leftWallIndex, rightWallIndex] = wallPair;
       const leftWallHeight = walls[+leftWallIndex];
       const rightWallHeight = walls[rightWallIndex];
       const boundaryWallHeight = Math.min(leftWallHeight, rightWallHeight);
