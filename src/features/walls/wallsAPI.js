@@ -10,7 +10,7 @@ export default function getWaterCells(walls = []) {
    * @returns {array} Arrays with indexes and values for walls that can contain water.
    */
   const getMaxWalls = () => {
-    const wallArrayMaxs = [];
+    const maxWalls = [];
 
     walls.forEach((currentWall, index) => {
       const previousWall = walls[index - 1];
@@ -22,36 +22,36 @@ export default function getWaterCells(walls = []) {
           || ((currentWall > previousWall) && (currentWall >= nextWall))
           || ((currentWall >= previousWall) && (currentWall > nextWall))
       ) {
-        wallArrayMaxs.push([index, currentWall]);
+        maxWalls.push([index, currentWall]);
       }
     });
 
-    return wallArrayMaxs;
+    return maxWalls;
   };
 
   /**
    * Returns an array of arrays with two elements, which are equal to left/right wall indexes
    * with the maximum amount of water between them.
-   * @param {array} wallArrayMaxs Arrays with indexes and values for walls that can contain water.
+   * @param {array} maxWalls Arrays with indexes and values for walls that can contain water.
    * @returns {array} Array of arrays with two elements, which are equal to left/right wall indexes
    * with the maximum amount of water between them.
    */
-  const getRelevantWallPairs = (wallArrayMaxs = []) => {
+  const getRelevantWallPairs = (maxWalls = []) => {
     const excludedWalls = [];
     const resultWalls = {};
 
-    for (let i = 0; i < wallArrayMaxs.length - 1; i += 1) {
+    for (let i = 0; i < maxWalls.length - 1; i += 1) {
       if (!excludedWalls.includes(i)) {
-        const leftWall = wallArrayMaxs[i];
+        const leftWall = maxWalls[i];
 
-        for (let j = i + 1; j < wallArrayMaxs.length; j += 1) {
-          const rightWall = wallArrayMaxs[j];
+        for (let j = i + 1; j < maxWalls.length; j += 1) {
+          const rightWall = maxWalls[j];
 
           if (!(rightWall[0] - leftWall[0] === 1)) {
             let blockingWallFound = false;
 
             for (let k = i + 1; k < j; k += 1) {
-              const middleWall = wallArrayMaxs[k];
+              const middleWall = maxWalls[k];
 
               if (middleWall[1] >= Math.min(leftWall[1], rightWall[1])) {
                 blockingWallFound = true;
