@@ -30,10 +30,11 @@ export default function getWaterCells(walls = []) {
   };
 
   /**
-   * Returns an object containing wall pairs whith the maximum amount of water between them.
+   * Returns an array of arrays with two elements, which are equal to left/right wall indexes
+   * with the maximum amount of water between them.
    * @param {array} wallArrayMaxs Arrays with indexes and values for walls that can contain water.
-   * @returns {array} Object containing wall pairs whith the maximum amount of water
-   * between them. Keys are equal to left wall indexes, values are equal to right wall indexes.
+   * @returns {array} Array of arrays with two elements, which are equal to left/right wall indexes
+   * with the maximum amount of water between them.
    */
   const getRelevantWallPairs = (wallArrayMaxs = []) => {
     const excludedWalls = [];
@@ -70,7 +71,7 @@ export default function getWaterCells(walls = []) {
       }
     }
 
-    return resultWalls;
+    return Object.entries(resultWalls);
   };
 
   /**
@@ -102,7 +103,7 @@ export default function getWaterCells(walls = []) {
   };
 
   const maxWalls = getMaxWalls();
-  const relevantWallPairs = Object.entries(getRelevantWallPairs(maxWalls));
+  const relevantWallPairs = getRelevantWallPairs(maxWalls);
   const waterCells = getCellsWithWater(relevantWallPairs);
 
   return waterCells;
