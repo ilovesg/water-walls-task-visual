@@ -1,14 +1,14 @@
 export default function getWaterCells(walls = []) {
-  const getMaxWalls = (arrayOfWalls) => {
+  const getMaxWalls = () => {
     const wallArrayMaxs = [];
 
-    arrayOfWalls.forEach((currentWall, index) => {
-      const previousWall = arrayOfWalls[index - 1];
-      const nextWall = arrayOfWalls[index + 1];
+    walls.forEach((currentWall, index) => {
+      const previousWall = walls[index - 1];
+      const nextWall = walls[index + 1];
 
       if (
         ((index === 0) && (currentWall > nextWall))
-          || ((index === arrayOfWalls.length - 1) && (currentWall > previousWall))
+          || ((index === walls.length - 1) && (currentWall > previousWall))
           || ((currentWall > previousWall) && (currentWall >= nextWall))
           || ((currentWall >= previousWall) && (currentWall > nextWall))
       ) {
@@ -57,17 +57,17 @@ export default function getWaterCells(walls = []) {
     return resultWalls;
   };
 
-  const getCellsWithWater = (arrayOfWalls = [], wallsWithWaterBetweenThem = []) => {
+  const getCellsWithWater = (wallsWithWaterBetweenThem = []) => {
     const cellsWithWater = [];
 
     wallsWithWaterBetweenThem.forEach((wallsPair) => {
       const [leftWallIndex, rightWallIndex] = wallsPair;
-      const leftWallHeight = arrayOfWalls[+leftWallIndex];
-      const rightWallHeight = arrayOfWalls[rightWallIndex];
+      const leftWallHeight = walls[+leftWallIndex];
+      const rightWallHeight = walls[rightWallIndex];
       const boundaryWallHeight = Math.min(leftWallHeight, rightWallHeight);
 
       for (let i = +leftWallIndex + 1; i < rightWallIndex; i += 1) {
-        const intermediateWallHeight = arrayOfWalls[i];
+        const intermediateWallHeight = walls[i];
 
         for (let j = intermediateWallHeight; j < boundaryWallHeight; j += 1) {
           cellsWithWater.push(`${j}:${i}`);
@@ -78,9 +78,9 @@ export default function getWaterCells(walls = []) {
     return cellsWithWater;
   };
 
-  const maxWalls = getMaxWalls(walls);
+  const maxWalls = getMaxWalls();
   const relevantWallPairs = Object.entries(getRelevantWallPairs(maxWalls));
-  const waterCells = getCellsWithWater(walls, relevantWallPairs);
+  const waterCells = getCellsWithWater(relevantWallPairs);
 
   return waterCells;
 }
