@@ -5,9 +5,8 @@
  */
 export default function getWaterCells(walls = []) {
   /**
-   * Returns an array of arrays with 2 elements, which are respectively equal to index and value
-   * from source array for walls that can contain water.
-   * @returns {array} Arrays with indexes and values for walls that can contain water.
+   * Returns an array of indexes for walls, which can contain water.
+   * @returns {array} Array of indexes for walls, which can contain water.
    */
   const getMaxWalls = () => {
     const maxWalls = [];
@@ -22,7 +21,7 @@ export default function getWaterCells(walls = []) {
           || ((currentWall > previousWall) && (currentWall >= nextWall))
           || ((currentWall >= previousWall) && (currentWall > nextWall))
       ) {
-        maxWalls.push([index, currentWall]);
+        maxWalls.push(index);
       }
     });
 
@@ -32,7 +31,7 @@ export default function getWaterCells(walls = []) {
   /**
    * Returns an array of arrays with two elements, which are equal to left/right wall indexes
    * with the maximum amount of water between them.
-   * @param {array} maxWalls Arrays with indexes and values for walls that can contain water.
+   * @param {array} maxWalls Array of indexes for walls, which can contain water.
    * @returns {array} Array of arrays with two elements, which are equal to left/right wall indexes
    * with the maximum amount of water between them.
    */
@@ -42,18 +41,21 @@ export default function getWaterCells(walls = []) {
 
     for (let i = 0; i < maxWalls.length - 1; i += 1) {
       if (!excludedWalls.includes(i)) {
-        const leftWall = maxWalls[i];
+        const leftWallIndex = maxWalls[i];
+        const leftWallHeight = walls[leftWallIndex];
 
         for (let j = i + 1; j < maxWalls.length; j += 1) {
-          const rightWall = maxWalls[j];
+          const rightWallIndex = maxWalls[j];
+          const rightWallHeight = walls[rightWallIndex];
 
-          if (!(rightWall[0] - leftWall[0] === 1)) {
+          if (!(rightWallIndex - leftWallIndex === 1)) {
             let blockingWallFound = false;
 
             for (let k = i + 1; k < j; k += 1) {
-              const middleWall = maxWalls[k];
+              const middleWallIndex = maxWalls[k];
+              const middleWallHeight = walls[middleWallIndex];
 
-              if (middleWall[1] >= Math.min(leftWall[1], rightWall[1])) {
+              if (middleWallHeight >= Math.min(leftWallHeight, rightWallHeight)) {
                 blockingWallFound = true;
                 break;
               }
@@ -64,7 +66,7 @@ export default function getWaterCells(walls = []) {
             }
 
             if (!blockingWallFound) {
-              [resultWalls[leftWall[0]]] = rightWall;
+              resultWalls[leftWallIndex] = rightWallIndex;
             }
           }
         }
