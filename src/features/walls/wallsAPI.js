@@ -78,9 +78,8 @@ export default function getWaterCells(walls = []) {
 
   /**
    * Returns an array containing coordinates of cells, which should be colored as water.
-   * @param {array} relevantWallPairs Object containing wall pairs whith the maximum amount
-   * of water between them. Keys are equal to left wall indexes, values are equal to right wall
-   * indexes.
+   * @param {array} relevantWallPairs Array of arrays with two elements, which are equal to
+   * left/right wall indexes with the maximum amount of water between them.
    * @returns {array} Array of water cells coordinates in string format like "[i]:[j]".
    */
   const getCellsWithWater = (relevantWallPairs = []) => {
